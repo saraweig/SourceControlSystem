@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Source_Control_System.Folder_Item;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SourceControlProject
-{
-    public static class Admin
-    {
-        public static bool confirmReview(Component c)
-        {
+namespace Source_Control_System;
 
-            Console.WriteLine("I confirm.");
-            return true;
-        }
+public static class Admin
+{
+    public static bool ConfirmReview(Component c)
+    {
+
+        Console.WriteLine("I confirm.");
+        return true;
     }
 }

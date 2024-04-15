@@ -19,7 +19,7 @@ public class Commit : IState
     }
     public void ChangeStatus(Component component)
     {
-        if (Admin.confirmReview(component))
+        if (Admin.ConfirmReview(component))
         {
             component.SetState(UnderReview.GetInstance());
         }

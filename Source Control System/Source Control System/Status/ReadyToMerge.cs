@@ -12,7 +12,7 @@ namespace SourceControlProject.Status;
 public class ReadyToMerge : IState
 {
     private static ReadyToMerge _instance;
-    public static ReadyToMerge GetInstanse()
+    public static ReadyToMerge GetInstance()
     {
         _instance ??= new ReadyToMerge();
         return _instance;
