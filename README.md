@@ -1,2 +1,3 @@
-# SourceControlSystem
+## Source Control System
 A simulation of a source-control system, providing insights into version control mechanisms and workflow management.
+This project, developed after completing a Design Pattern course, showcases the implementation of several design patterns within a simulation of a source-control system. It serves as an educational exercise, demonstrating the application of design patterns such as Composite, Memento, State and more to manage version control mechanisms and workflow management concepts. Please note that this project is primarily for learning purposes and may not have full functionality for production use."
