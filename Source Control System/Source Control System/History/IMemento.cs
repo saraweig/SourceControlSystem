@@ -1,18 +1,20 @@
-﻿using SourceControlProject.Status;
+﻿using Source_Control_System.Folder_Item;
+using Source_Control_System.Status;
+using SourceControlProject.Status;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SourceControlProject.Memento
+namespace SourceControlSystem.History;
+
+public interface IMemento
 {
-    public interface IMemento
-    {
-        string GetName();
+    string GetName();
 
-        IState GetState();
+    IState GetState();
 
-        DateTime GetDate();
-    }
+    DateTime GetDate();
+    Dictionary<string, Component> GetComponents();
 }

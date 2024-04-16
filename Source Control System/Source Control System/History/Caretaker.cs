@@ -1,58 +1,58 @@
-﻿using System;
+﻿using Source_Control_System.Folder_Item;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SourceControlProject.Memento
+namespace SourceControlSystem.History;
+
+public class Caretaker
 {
-    public class Caretaker
+    private List<IMemento> _mementos = new List<IMemento>();
+
+    private Component component = null;
+
+    public Caretaker(Component component)
     {
-        private List<IMemento> _mementos = new List<IMemento>();
+        this.component = component;
+    }
 
-        private Component component = null;
+    public void Backup()
+    {
+        Console.WriteLine("\nCaretaker: Saving Components state...");
+        this._mementos.Add(this.component.Save());
+    }
 
-        public Caretaker(Component component)
+    public void Undo()
+    {
+        if (this._mementos.Count == 0)
         {
-            this.component = component;
+            return;
         }
 
-        public void Backup()
+        var memento = this._mementos.Last();
+        this._mementos.Remove(memento);
+
+        Console.WriteLine("Caretaker: Restoring state to: " + memento.GetName());
+
+        try
         {
-            Console.WriteLine("\nCaretaker: Saving Components state...");
-            this._mementos.Add(this.component.Save());
+            this.component.Restore(memento);
         }
-
-        public void Undo()
+        catch (Exception)
         {
-            if (this._mementos.Count == 0)
-            {
-                return;
-            }
-
-            var memento = this._mementos.Last();
-            this._mementos.Remove(memento);
-
-            Console.WriteLine("Caretaker: Restoring state to: " + memento.GetName());
-
-            try
-            {
-                this.component.Restore(memento);
-            }
-            catch (Exception)
-            {
-                this.Undo();
-            }
+            this.Undo();
         }
+    }
 
-        public void ShowHistory()
+    public void ShowHistory()
+    {
+        Console.WriteLine("Caretaker: Here's the list of mementos:");
+
+        foreach (var memento in this._mementos)
         {
-            Console.WriteLine("Caretaker: Here's the list of mementos:");
-
-            foreach (var memento in this._mementos)
-            {
-                Console.WriteLine(memento.GetName());
-            }
+            Console.WriteLine(memento.GetName());
         }
     }
 }

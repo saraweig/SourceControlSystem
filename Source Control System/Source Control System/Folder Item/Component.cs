@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Source_Control_System.Status;
+using SourceControlSystem.History;
 using SourceControlSystem.Status;
 
 namespace Source_Control_System.Folder_Item;
@@ -55,6 +56,32 @@ public abstract class Component
             State.ChangeStatus(this);
             State.ChangeStatus(this);
         }
+    }
+    public abstract IMemento Save();
+
+    public void Restore(IMemento memento)
+    {
+        if (memento is not ConcreteMemento)
+        {
+            throw new Exception("Unknown memento class " + memento.ToString());
+        }
+
+        this.State = memento.GetState();
+        Console.Write($"Originator: My state has changed to: {State.GetStatus()}");
+    }
+
+    public Component RequestAReview()
+    {
+
+        if (State.GetStatus() != "UnderReview")
+        {
+            Console.WriteLine("cant review yet");
+        }
+        else
+        {
+            State.ChangeStatus(this);
+        }
+        return this;
     }
     public abstract Component Copy();
 }
